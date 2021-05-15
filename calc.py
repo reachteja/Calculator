@@ -38,9 +38,9 @@ if submit:
         interest = tot_interest
         term1=term*1
     
-    interest_split = interest/term
+    interest_split = round(interest/term,1)
     
-    #st.write(interest)
+    st.write(interest_split)
     
     fig, ax = plt.subplots()
     ax.pie([tot_interest,dep_amount],labels=['Interest','Deposit'],explode=(0.1,0),
@@ -49,8 +49,7 @@ if submit:
     cols[1].write('Priniciple amount : '+ str(dep_amount))
     cols[1].write('Interest amount : '+ str(tot_interest))
     cols[1].write('Total Assured amount : '+ str(tot_interest + dep_amount))
-    
-    
+       
     l2=[]
     i=1
     dep_amount1=dep_amount
@@ -62,14 +61,10 @@ if submit:
         dep_amount1=0
         i+=1
         l2.append(l1)
-    
-    
+      
     dataframe = pd.DataFrame(l2,columns=[int_type[:-2],'Amount Deposited (Rs.)',
                                          'Interest Received (Rs.)'])
     
     dataframe['Total Interest Received (Rs.)']=dataframe['Interest Received (Rs.)'].cumsum()
-    st.dataframe(dataframe)
-    
-
-
-#st.text(a)
+   
+    st.table(dataframe)
